@@ -1,0 +1,9 @@
+.opencode/
+src/
+tsconfig.json
+*.log
+.git/
+.gitignore
+setup.ts
+reindex_lms.ts
+opencode-context-bank-*.tgz

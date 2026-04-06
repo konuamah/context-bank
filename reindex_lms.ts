@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import { generateEmbedding } from "./dist/embeddings.js";
+import { generateEmbedding } from "./embeddings.js";
 
 const storeDir = path.join(process.env.USERPROFILE || "", ".config", "opencode", "context-bank");
 const filePath = path.join(storeDir, "D__projects_lms.json");

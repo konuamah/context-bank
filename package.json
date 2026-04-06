@@ -1,8 +1,32 @@
 {
-  "name": "opencode-context-bank",
+  "name": "@konuamah/context-bank",
   "version": "0.1.0",
-  "description": "A persistent context bank plugin for OpenCode — retrieves, stores, and compresses coding session memory.",
+  "description": "Persistent context bank for OpenCode with semantic search — no external dependencies.",
   "type": "module",
+  "author": "Kelvin Owusu Nuamah <kelvinnuamah123@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/konuamah/context-bank.git"
+  },
+  "bugs": {
+    "url": "https://github.com/konuamah/context-bank/issues"
+  },
+  "homepage": "https://github.com/konuamah/context-bank#readme",
+  "keywords": [
+    "opencode",
+    "opencode-plugin",
+    "context",
+    "memory",
+    "semantic-search",
+    "ai",
+    "embeddings",
+    "rag",
+    "retrieval"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
@@ -13,7 +37,8 @@
   },
   "files": [
     "dist",
-    "README.md"
+    "README.md",
+    "LICENSE"
   ],
   "scripts": {
     "dev": "bun run index.ts",
