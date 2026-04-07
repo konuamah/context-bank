@@ -43,7 +43,20 @@ Add the plugin to your global (`~/.config/opencode/opencode.json`) or project-le
 }
 ```
 
-### 3. (Optional) Pre-download AI Model
+### 3. Restart OpenCode
+**Important**: After adding the plugin to your config:
+
+1. Exit OpenCode completely (close all sessions)
+2. Start a new OpenCode session
+
+**If the plugin doesn't load after restarting OpenCode, restart your machine.** This is especially important on macOS where cached processes may prevent the plugin from initializing.
+
+To verify the plugin is working, check if the context bank directory exists:
+```bash
+ls ~/.config/opencode/context-bank/
+```
+
+### 4. (Optional) Pre-download AI Model
 The model (~23 MB) downloads automatically on first use. To pre-download it manually:
 ```bash
 npx @konuamah/context-bank-setup
