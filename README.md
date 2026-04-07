@@ -14,6 +14,7 @@ This plugin solves the "goldfish memory" problem in LLM-based coding. It maintai
 - ✅ **Semantic Retrieval**: Finds conceptually related context using 384-dimensional embeddings.
 - ✅ **No External Servers**: Powered by `@xenova/transformers` running entirely in-process.
 - ✅ **Privacy First**: Your data stays local in `~/.config/opencode/context-bank/`.
+- ✅ **Cross-Platform**: Fully compatible with macOS, Linux, and Windows.
 - ✅ **Automatic Compaction**: Compresses old memory entries to save tokens while retaining core insights.
 
 | Hook | Action |
@@ -33,7 +34,7 @@ npm install @konuamah/context-bank
 ```
 
 ### 2. Add to OpenCode Config
-Add the plugin to your global or project-level `opencode.json`:
+Add the plugin to your global (`~/.config/opencode/opencode.json`) or project-level `opencode.json`. **Note: This step must be done manually after installation.**
 
 ```json
 {
