@@ -16,13 +16,16 @@ This plugin solves the "goldfish memory" problem in LLM-based coding. It maintai
 - ✅ **Privacy First**: Your data stays local in `~/.config/opencode/context-bank/`.
 - ✅ **Cross-Platform**: Fully compatible with macOS, Linux, and Windows.
 - ✅ **Automatic Compaction**: Compresses old memory entries to save tokens while retaining core insights.
+- ✅ **Preemptive Compaction**: Proactively triggers compaction before context limits are hit, using session summarization to preserve memory context.
 
 | Hook | Action |
-|---|---|
+|---|---|---|
 | `tool.execute.before` | Retrieves relevant past context and injects it before each tool call |
 | `tool.execute.after` | Stores tool results with semantic embeddings |
 | `experimental.session.compacting` | Injects memory summary during session compaction |
 | `event: session.idle` | Compresses old entries when the session ends |
+| `event: message.updated` | Triggers preemptive compaction when context usage exceeds threshold |
+| `client` | Provides SDK client for `session.summarize()` and `tui.showToast()` |
 
 ---
 
@@ -93,6 +96,10 @@ The plugin uses sensible defaults but can be tuned by editing the constants in t
 | `TOP_K` | 8 | Number of relevant entries retrieved per query |
 | `TOKEN_CAP` | 1200 | Maximum tokens dedicated to injected context |
 | `SUMMARIZE_AFTER_HOURS` | 24 | Age before an entry's result is compressed |
+| `COMPACTION_THRESHOLD` | 0.80 | Context usage ratio (80%) that triggers preemptive compaction |
+| `MIN_TOKENS_FOR_COMPACTION` | 50000 | Minimum tokens before compaction can trigger |
+| `COMPACTION_COOLDOWN_MS` | 30000 | Cooldown period (30s) between compaction attempts |
+| `DEFAULT_CONTEXT_LIMIT` | 200000 | Fallback context limit if model limit cannot be determined |
 
 ---
 
