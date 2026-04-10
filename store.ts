@@ -48,17 +48,20 @@ function writeDB(project: string, entries: ContextEntry[]) {
 export async function saveEntry(opts: StoreOptions): Promise<ContextEntry> {
   const entries = readDB(opts.project)
 
-  // Prepare text for embedding: tool + args + result
   const embeddingText = [
     opts.tool,
     JSON.stringify(opts.args),
     typeof opts.result === "string"
-      ? opts.result.slice(0, 500) // Cap for embedding
+      ? opts.result.slice(0, 500)
       : JSON.stringify(opts.result).slice(0, 500),
   ].join(" ")
 
-  // Generate embedding (async)
-  const embedding = await generateEmbedding(embeddingText)
+  let embedding: number[] = []
+  try {
+    embedding = await generateEmbedding(embeddingText)
+  } catch (error) {
+    console.error("[context-bank] Embedding generation failed:", error)
+  }
 
   const entry: ContextEntry = {
     id: randomUUID(),
@@ -66,15 +69,14 @@ export async function saveEntry(opts: StoreOptions): Promise<ContextEntry> {
     args: opts.args,
     result: typeof opts.result === "string"
       ? opts.result
-      : JSON.stringify(opts.result).slice(0, 2000), // cap result size
+      : JSON.stringify(opts.result).slice(0, 2000),
     project: opts.project,
     timestamp: Date.now(),
-    embedding: embedding.length > 0 ? embedding : undefined, // Only store if successful
+    embedding: embedding.length > 0 ? embedding : undefined,
   }
 
   entries.push(entry)
 
-  // Prune to MAX_ENTRIES
   const pruned = entries.slice(-MAX_ENTRIES)
   writeDB(opts.project, pruned)
 

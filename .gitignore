@@ -7,3 +7,4 @@ dist/
 .env
 docs/
 .worktrees/
+opencode-supermemory-main/
